@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>what is my age</title>
+    <style>
+        body {
+            background-color: gray;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            color: white;
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        input[type="date"] {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .result {
+            margin-top: 20px;
+        }
+
+        .result h2 {
+            color: white;
+            font-size: 28px;
+            margin: 10px 0;
+        }
+
+        .years,
+        .monts,
+        .days {
+            font-size: 24px;
+        }
+    </style>
+</head>
+
+<body style="background-color: gray;">
+    <h1>what is my age</h1>
+    <input type="date" id="dob">
+    <button type="submit" id="chack">chack</button>
+    <div class="result">
+        <h2 class="years"></h2>
+        <h2 class="monts"></h2>
+        <h2 class="days"></h2>
+
+    </div>
+</body>
+<script>
+    document.querySelector('#chack').addEventListener('click', function () {
+        const userdate = new Date(document.querySelector('#dob').value);
+        const curdate = new Date()
+        const years = document.querySelector('.years')
+        const month = document.querySelector('.monts')
+        const days = document.querySelector('.days')
+
+        let yeardiff = curdate.getFullYear() - userdate.getFullYear()
+        let monthdiff = curdate.getMonth() - userdate.getMonth()
+        let daydiff = curdate.getDate() - userdate.getDate()
+        if (yeardiff <= 0 && monthdiff <= 0 && daydiff <= 0) {
+            alert("age is invelid");
+        } else {
+            if (daydiff < 0) {
+                const daysInPevMonth = new Date(curdate.getFullYear(), curdate.getMonth(), 0).getDate();
+                daydiff += daysInPevMonth
+                monthdiff--
+            }
+            if (monthdiff < 0) {
+                monthdiff += 12;
+                yeardiff--
+            }
+            years.innerHTML = `${yeardiff} : Years`;
+            month.innerHTML = `${monthdiff} : Months`;
+            days.innerHTML = `${daydiff} : Days`;
+        }
+    })
+</script>
+
+</html>
